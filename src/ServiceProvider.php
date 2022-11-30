@@ -27,10 +27,12 @@ class ServiceProvider extends BaseServiceProvider
         
         if ($this->app->runningInConsole()) {
             $this->commands([
-                // ...
+                \NogorSolutionsLTD\Hver\Console\Commands\SetLocalCommand::class,
+                \NogorSolutionsLTD\Hver\Console\Commands\SetProdCommand::class,
+                \NogorSolutionsLTD\Hver\Console\Commands\SetWebPackProdCommand::class,
+                \NogorSolutionsLTD\Hver\Console\Commands\SetWebPackLocalCommand::class,
             ]);
         }
-
         
         $this->publishes([
             __DIR__.'/../config/hver.php' => config_path('hver.php'),
