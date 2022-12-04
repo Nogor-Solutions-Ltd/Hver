@@ -25,7 +25,6 @@ class ServiceProvider extends BaseServiceProvider
     public function boot()
     {
 
-
         # Load all helper functions.
         foreach ( scandir( __DIR__ . DIRECTORY_SEPARATOR . 'helpers' ) as $helperFile ) {
             $path = sprintf(
@@ -58,10 +57,10 @@ class ServiceProvider extends BaseServiceProvider
 
             $this->commands([
                 \NogorSolutionsLTD\Hver\Console\Commands\EnvironmentCommand::class,
+
                 \NogorSolutionsLTD\Hver\Console\Commands\TestsGeneratorCommand::class,
             ]);
         }
-
 
 
         $this->publishes([
