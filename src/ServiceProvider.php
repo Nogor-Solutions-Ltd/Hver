@@ -24,6 +24,7 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function boot()
     {
+
         # Load all helper functions.
         foreach ( scandir( __DIR__ . DIRECTORY_SEPARATOR . 'helpers' ) as $helperFile ) {
             $path = sprintf(
@@ -49,13 +50,18 @@ class ServiceProvider extends BaseServiceProvider
         }
 
         if ($this->app->runningInConsole()) {
+
+              $this->publishes( [
+        __DIR__ . '/stubs/resource_feature_tests.stub' => config_path( 'feature-test-generator/stubs/resource_feature_tests.stub' ),
+    ], 'stubs' );
+
             $this->commands([
                 \NogorSolutionsLTD\Hver\Console\Commands\EnvironmentCommand::class,
-                \NogorSolutionsLTD\Hver\Console\Commands\SetProdCommand::class,
-                \NogorSolutionsLTD\Hver\Console\Commands\SetWebPackProdCommand::class,
-                \NogorSolutionsLTD\Hver\Console\Commands\SetWebPackLocalCommand::class,
+
+                \NogorSolutionsLTD\Hver\Console\Commands\TestsGeneratorCommand::class,
             ]);
         }
+
 
         $this->publishes([
             __DIR__.'/../config/hver.php' => config_path('hver.php'),
